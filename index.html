@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text 2 Speech</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div id="text2speech"></div>
+
+    <script type="text/x-template" id="text2speechTemplate">
+        <div>
+    <div class="shadow-lg border h-20 m-6 bg-teal-500 text-white border-teal-500 flex">
+        <div class="self-center pl-4 text-3xl">Text to speech</div>
+    </div>
+
+    <div class="m-6 flex justify-around">
+    <div>
+        <h6 class="mb-2 text-gray-700">Voice options</h6>
+        <div class="inline-block relative w-auto">
+            <select v-model='voice' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                <option v-for="voice in voices" :value="voice">{{voice.voiceURI}} {{voice.default? '(default)' : ''}}</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h6 class="mb-2 text-gray-700">Rate</h6>
+        <input type="range" class="h-1" min="1" max="100" v-model="rate" />
+    </div>
+
+    <div>
+        <h6 class="mb-2 text-gray-700">Pitch</h6>
+        <input type="range" class="h-1" v-model="pitch" min="0" max="2" />
+    </div>
+</div>
+
+<div class="m-6 border-b border-b-2 border-teal-500 py-2">
+    <h6 class="mb-2 text-gray-700">Write Message</h6>
+    <input v-model="text" class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Jane Doe" aria-label="Full name">
+</div>
+<button class="flex-shrink-0 ml-6 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded" type="button" v-on:click="handleSpeak" >
+    Speak
+</button>
+</div>
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
