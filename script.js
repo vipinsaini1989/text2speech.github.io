@@ -10,7 +10,7 @@ new Vue({
     return {
       voices: [],
       voice: null,
-      rate: 10,
+      rate: 1,
       pitch: 1,
       text: '',
       notFound: false,
