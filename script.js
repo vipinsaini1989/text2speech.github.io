@@ -13,11 +13,19 @@ new Vue({
       rate: 10,
       pitch: 1,
       text: '',
+      notFound: false,
     };
   },
   mounted: function () {
     setTimeout(() => {
-      this.populateVoiceList();
+      if (synth) {
+        this.populateVoiceList();
+      } else {
+        this.notFound = true;
+        alert(
+          `Your browser does not support speech synthesis.\nWe recommend you use Google Chrome.`
+        );
+      }
     }, 500);
   },
   methods: {
@@ -28,6 +36,18 @@ new Vue({
     },
 
     handleSpeak() {
+      if (this.notFound) {
+        alert(
+          `Your browser does not support speech synthesis.\nWe recommend you use Google Chrome.`
+        );
+        return;
+      }
+
+      if (!this.text) {
+        alert('Write some text to read.');
+        return;
+      }
+
       const utterThis = new SpeechSynthesisUtterance(this.text);
       utterThis.pitch = this.pitch;
       utterThis.rate = this.rate;
