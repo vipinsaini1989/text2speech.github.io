@@ -6,7 +6,7 @@ const synth = window.speechSynthesis;
 new Vue({
   el: '#text2speech',
   template: '#text2speechTemplate',
-  data: function () {
+  data() {
     return {
       voices: [],
       voice: null,
@@ -16,15 +16,17 @@ new Vue({
       notFound: false,
     };
   },
-  mounted: function () {
+  mounted() {
     setTimeout(() => {
-      if (synth) {
-        this.populateVoiceList();
-      } else {
-        this.notFound = true;
-        alert(
-          `Your browser does not support speech synthesis.\nWe recommend you use Google Chrome.`
-        );
+      if ('speechSynthesis' in window) {
+        if (synth) {
+          this.populateVoiceList();
+        } else {
+          this.notFound = true;
+          alert(
+            `Your browser does not support speech synthesis.\nWe recommend you use Google Chrome.`
+          );
+        }
       }
     }, 500);
   },
